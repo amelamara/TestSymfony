@@ -7,15 +7,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php-versions: ['7.4']
-    steps:
-      - uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: composer install
-      - name: Update composer
-        run: composer update
-      - name: PHPUnit
-        run: php bin/phpunit
+    steps:
+      -   uses: actions/checkout@v2
+
+      -   name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+              php-version: '7.4'
+
+      -   name: Run composer install
+          run: composer install -n --prefer-dist
+
+      -   name: Run PHPUnit
+          run: php bin/phpunit
