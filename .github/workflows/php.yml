@@ -15,5 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: composer install
+      - name: Update composer
+        run: composer update
       - name: PHPUnit
         run: php bin/phpunit
